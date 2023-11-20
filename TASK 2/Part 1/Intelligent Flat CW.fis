@@ -1,0 +1,73 @@
+[System]
+Name='Intelligent Flat CW'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=3
+NumRules=11
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Outdoor-Weather-Conditions'
+Range=[-5 40]
+NumMFs=3
+MF1='cold':'trimf',[-5 8 15]
+MF2='moderate':'trimf',[12 20 27]
+MF3='warm':'trimf',[23.8 32.8 40]
+
+[Input2]
+Name='Presence-Sensor'
+Range=[0 1]
+NumMFs=3
+MF1='low':'trimf',[0 0.2 0.4]
+M;F2='medium':'trimf',[0.3 0.6 0.8]
+MF3='high':'trimf',[0.7 0.9 1]
+
+[Input3]
+Name='Sunshine-Sensor'
+Range=[0 100000]
+NumMFs=3
+MF1='low':'trimf',[0 5000 10000]
+MF2='medium':'trimf',[8000 25000 50000]
+MF3='high':'trimf',[45000 75000 100000]
+
+[Output1]
+Name='Climate-HVAC-Control'
+Range=[0 30]
+NumMFs=3
+MF1='low':'trimf',[0 8 12]
+MF2='medium':'trimf',[10 15 22]
+MF3='high':'trimf',[21 25 29]
+
+[Output2]
+Name='Lights-On-Off'
+Range=[0 1]
+NumMFs=3
+MF1='off':'trimf',[0 0.2 0.4]
+MF2='dim':'trimf',[0.3 0.6 0.9]
+MF3='on':'trimf',[0.7 0.8 1]
+
+[Output3]
+Name='Interior-Blinds'
+Range=[0 1]
+NumMFs=3
+MF1='closed':'trimf',[0 0.2 0.4]
+MF2='partially-opened':'trimf',[0.3 0.6 0.8]
+MF3='fully-opened':'trimf',[0.7 0.9 1]
+
+[Rules]
+1 0 0, 3 0 0 (1) : 1
+2 0 0, 2 0 0 (1) : 1
+3 0 0, 1 0 0 (1) : 1
+0 1 0, 0 1 0 (1) : 1
+0 2 0, 0 2 0 (1) : 1
+0 3 0, 0 3 0 (1) : 1
+0 0 1, 0 0 3 (1) : 1
+0 0 2, 0 0 2 (1) : 1
+0 0 3, 0 0 1 (1) : 1
+0 3 3, 0 0 2 (1) : 1
+0 1 1, 0 0 3 (1) : 1
